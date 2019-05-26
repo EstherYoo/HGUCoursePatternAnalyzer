@@ -2,6 +2,7 @@ package edu.handong.analysis;
 
 import edu.handong.analysis.datamodel.Course;
 import edu.handong.analysis.datamodel.Student;
+import java.util.ArrayList;
 
 public class HGUCoursePatternAnalyzer {
 	
@@ -21,8 +22,8 @@ public class HGUCoursePatternAnalyzer {
 
 	private int numOfStudents;
 	private int numOfCourses;
-	private Student[] students;
-	private Course[] courses;
+	private ArrayList<Student> students;
+	private ArrayList<Course> courses;
 	
 	/**
 	 * This method runs our analysis logic to get the list of student and course names from lines.
@@ -32,15 +33,18 @@ public class HGUCoursePatternAnalyzer {
 		
 		numOfStudents = Integer.parseInt(args[0]);
 		numOfCourses = Integer.parseInt(args[1]);
-			
-		students = initiateStudentArrayFromLines(lines);
+		
+		for (Student temp: initiateStudentArrayFromLines(lines))
+			students.add(temp);
 		
 		System.out.println("Number of All Students: " + numOfStudents);
 		for(Student student: students) {
 			System.out.println(student.getName());
 		}
 		
-		courses = initiateCourseArrayFromLines(lines);
+		for (Course temp: initiateCourseArrayFromLines(lines))
+			courses.add(temp);
+		
 		System.out.println("Number of All Courses: " + numOfCourses);
 		for(Course course: courses) {
 			System.out.println(course.getCourseName());
@@ -62,7 +66,6 @@ public class HGUCoursePatternAnalyzer {
 				continue;
 			}
 			individualName[numberOfStudent] = name;
-			System.out.println(individualName[numberOfStudent].getName());
 			numberOfStudent++;
 		}
 		return individualName;
